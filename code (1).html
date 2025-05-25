@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="appTitle">इंटरनेट शिकायत प्रणाली - SHIV SECURE SOLUTIONS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* All previous CSS styles */
+        :root {
+            --font-primary: 'Poppins', sans-serif;
+            --font-company: 'Playfair Display', serif; 
+
+            /* Light Theme */
+            --light-bg-gradient-start: #e0eafc;
+            --light-bg-gradient-end: #cfdef3;
+            --light-container-bg: #ffffff;
+            --light-text-color: #333333;
+            --light-primary-color: #5a3a93;
+            --light-section-bg: #f8f9fa;
+            --light-input-border: #ced4da;
+            --light-input-bg: #ffffff;
+            --light-sidebar-bg: #4a3f78;
+            --light-sidebar-text: #e0e0e0;
+            --light-sidebar-hover-bg: #6f61a0;
+            --light-sidebar-active-text: #ffffff;
+            --light-item-border: #dee2e6;
+            --light-item-bg: #ffffff;
+            --light-box-shadow: rgba(0, 0, 0, 0.1);
+            --light-company-name-color: #4527a0; 
+            --light-logout-btn-bg: #f8d7da;
+            --light-logout-btn-text: #721c24;
+            --light-logout-btn-hover-bg: #f5c6cb;
+            --light-expiring-item-bg: #fff3cd;
+            --light-expiring-item-border: #ffeeba;
+
+
+            /* Dark Theme */
+            --dark-bg-gradient-start: #2c3e50;
+            --dark-bg-gradient-end: #34495e;
+            --dark-container-bg: #2c3e50; 
+            --dark-text-color: #ecf0f1;
+            --dark-primary-color: #bb86fc;
+            --dark-section-bg: #34495e;
+            --dark-input-border: #495057;
+            --dark-input-bg: #3e4a59;
+            --dark-sidebar-bg: #1e272e;
+            --dark-sidebar-text: #bdc3c7;
+            --dark-sidebar-hover-bg: #34495e;
+            --dark-sidebar-active-text: #ffffff;
+            --dark-item-border: #495057;
+            --dark-item-bg: #3e4a59;
+            --dark-box-shadow: rgba(0, 0, 0, 0.25);
+            --dark-company-name-color: #d1c4e9; 
+            --dark-logout-btn-bg: #492b2f;
+            --dark-logout-btn-text: #f8d7da;
+            --dark-logout-btn-hover-bg: #5a3338;
+            --dark-expiring-item-bg: #533f00;
+            --dark-expiring-item-border: #665100;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            margin: 0;
+            padding: 15px; 
+            background: linear-gradient(135deg, var(--light-bg-gradient-start) 0%, var(--light-bg-gradient-end) 100%);
+            color: var(--light-text-color);
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            justify-content: flex-start; 
+            min-height: 100vh;
+            font-size: 15px; 
+            overflow-x: hidden; 
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        body.dark-theme {
+            background: linear-gradient(135deg, var(--dark-bg-gradient-start) 0%, var(--dark-bg-gradient-end) 100%);
+            color: var(--dark-text-color);
+        }
+
+        .app-header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px; 
+            padding-top: 10px; 
+        }
+        
+        .login-page-logo-container {
+            text-align: center;
+            margin-bottom: 15px; /* Adjusted margin */
+        }
+        .login-page-logo-container img {
+            max-width: 120px; /* Adjust size as needed, smaller for mobile */
+            height: auto;
+             /* Removed border-radius: 50% if the logo isn't perfectly circular or to use its natural shape */
+        }
+        .login-page-company-name {
+             font-family: var(--font-primary); 
+             font-size: 1.3em; /* Adjusted */
+             font-weight: 600;
+             color: var(--light-company-name-color);
+             margin-top: 8px; /* Adjusted */
+             text-align: center;
+        }
+        body.dark-theme .login-page-company-name {
+            color: var(--dark-company-name-color);
+        }
+
+
+        .company-name-display { 
+            font-family: var(--font-company);
+            font-size: 2.2em; 
+            font-weight: 700;
+            color: var(--light-company-name-color);
+            letter-spacing: 1px;
+            padding: 5px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        body.dark-theme .company-name-display {
+            color: var(--dark-company-name-color);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+
+        .container {
+            width: 100%; 
+            max-width: 500px; 
+            background: var(--light-container-bg);
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 8px 25px var(--light-box-shadow);
+            transition: max-width 0.5s ease-in-out, background-color 0.5s ease;
+        }
+        body.dark-theme .container {
+            background: var(--dark-container-bg);
+            box-shadow: 0 8px 25px var(--dark-box-shadow);
+        }
+
+        body.on-login-page .container {
+            max-width: 400px; 
+        }
+        body.on-admin-dashboard .container,
+        body.on-customer-dashboard .container {
+            max-width: 95%; 
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--light-item-border);
+        }
+        body.dark-theme .dashboard-header {
+            border-bottom-color: var(--dark-item-border);
+        }
+        .dashboard-header h2 {
+            margin: 0;
+            font-size: 1.4em; 
+        }
+
+        .text-logout-btn { 
+            background-color: var(--light-logout-btn-bg);
+            color: var(--light-logout-btn-text);
+            border: 1px solid var(--light-logout-btn-text);
+            padding: 5px 10px; 
+            border-radius: 5px;
+            font-family: var(--font-primary);
+            font-weight: 500;
+            font-size: 0.85em; 
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .text-logout-btn:hover {
+            background-color: var(--light-logout-btn-hover-bg);
+        }
+        body.dark-theme .text-logout-btn {
+            background-color: var(--dark-logout-btn-bg);
+            color: var(--dark-logout-btn-text);
+            border-color: var(--dark-logout-btn-text);
+        }
+        body.dark-theme .text-logout-btn:hover {
+            background-color: var(--dark-logout-btn-hover-bg);
+        }
+
+
+        h1, h2, h3, h4 {
+            text-align: center;
+            color: var(--light-text-color); 
+            margin-bottom: 15px; 
+            font-weight: 600;
+        }
+        body.dark-theme h1, body.dark-theme h2, body.dark-theme h3, body.dark-theme h4 {
+            color: var(--dark-text-color);
+        }
+        h1 { font-size: 1.6em; color: var(--light-primary-color); } 
+        body.dark-theme h1 { color: var(--dark-primary-color); }
+
+
+        .section {
+            margin-bottom: 20px;
+            padding: 15px; 
+            border: 1px solid var(--light-item-border);
+            border-radius: 8px;
+            background-color: var(--light-section-bg);
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+        body.dark-theme .section {
+            border-color: var(--dark-item-border);
+            background-color: var(--dark-section-bg);
+        }
+
+        .hidden { display: none !important; }
+        label { display: block; margin-bottom: 6px; font-weight: 500; color: var(--light-text-color); }
+        body.dark-theme label { color: var(--dark-text-color); }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"],
+        select {
+            width: calc(100% - 20px); 
+            padding: 10px; 
+            margin-bottom: 12px;
+            border: 1px solid var(--light-input-border);
+            border-radius: 5px; 
+            font-size: 0.95em; 
+            font-family: var(--font-primary);
+            box-sizing: border-box;
+            background-color: var(--light-input-bg);
+            color: var(--light-text-color);
+            transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+        }
+        body.dark-theme input[type="text"],
+        body.dark-theme input[type="password"],
+        body.dark-theme input[type="date"],
+        body.dark-theme select {
+            border-color: var(--dark-input-border);
+            background-color: var(--dark-input-bg);
+            color: var(--dark-text-color);
+        }
+        body.dark-theme input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+
+        button, .action-btn { 
+            background: linear-gradient(135deg, var(--light-primary-color), color-mix(in srgb, var(--light-primary-color) 70%, black));
+            color: white;
+            padding: 10px 15px; 
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em; 
+            font-family: var(--font-primary);
+            font-weight: 500;
+            width: 100%;
+            transition: background 0.3s ease, transform 0.1s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        button:hover, .action-btn:hover {
+            background: linear-gradient(135deg, color-mix(in srgb, var(--light-primary-color) 90%, black), color-mix(in srgb, var(--light-primary-color) 60%, black));
+            transform: translateY(-1px);
+        }
+        button:active, .action-btn:active {
+            transform: translateY(0px);
+        }
+
+        body.dark-theme button, body.dark-theme .action-btn {
+             background: linear-gradient(135deg, var(--dark-primary-color), color-mix(in srgb, var(--dark-primary-color) 70%, #fff));
+             color: #121212; 
+        }
+         body.dark-theme button:hover, body.dark-theme .action-btn:hover {
+            background: linear-gradient(135deg, color-mix(in srgb, var(--dark-primary-color) 90%, #fff), color-mix(in srgb, var(--dark-primary-color) 60%, #fff));
+        }
+        
+        .complaint-item, .customer-list-item {
+            border: 1px solid var(--light-item-border);
+            padding: 12px; 
+            margin-bottom: 8px;
+            border-radius: 6px;
+            background-color: var(--light-item-bg);
+            box-shadow: 0 2px 4px var(--light-box-shadow);
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+        body.dark-theme .complaint-item, body.dark-theme .customer-list-item {
+             border-color: var(--dark-item-border);
+             background-color: var(--dark-item-bg);
+             box-shadow: 0 2px 4px var(--dark-box-shadow);
+        }
+        .expiring-customer-item {
+            background-color: var(--light-expiring-item-bg) !important;
+            border-left: 5px solid orange !important;
+            color: #856404; 
+        }
+        body.dark-theme .expiring-customer-item {
+            background-color: var(--dark-expiring-item-bg) !important;
+            border-left-color: orange !important;
+            color: #ffeeba; 
+        }
+         .expiring-customer-item p {
+            margin: 4px 0; 
+            font-size: 0.9em;
+        }
+
+
+        .complaint-item.pending { border-left: 5px solid orange; }
+        .complaint-item.solved { border-left: 5px solid green; }
+        .error-message { color: #e74c3c; font-size: 0.85em; margin-top: 8px; text-align: center; }
+        .success-message { color: #2ecc71; font-size: 0.85em; margin-top: 8px; text-align: center; }
+        .customer-info p { margin: 6px 0; font-size: 1em; }
+        .customer-info strong { color: var(--light-primary-color); }
+        body.dark-theme .customer-info strong { color: var(--dark-primary-color); }
+        
+        #adminDashboardSection { display: flex; position: relative; background: transparent; box-shadow: none; padding:0; border:0;} 
+        #adminSidebar {
+            width: 220px; 
+            background-color: var(--light-sidebar-bg); 
+            padding: 15px;
+            color: var(--light-sidebar-text);
+            border-radius: 8px 0 0 8px;
+            transition: transform 0.3s ease-in-out, background-color 0.5s ease, width 0.3s ease;
+            min-height: calc(100vh - 120px); 
+            flex-shrink: 0; 
+            position: fixed; 
+            left: -220px; 
+            top: 60px; 
+            height: calc(100% - 60px);
+            z-index: 999;
+            overflow-y: auto;
+        }
+        #adminSidebar.open {
+            transform: translateX(220px); 
+        }
+
+        body.dark-theme #adminSidebar { background-color: var(--dark-sidebar-bg); color: var(--dark-sidebar-text); }
+
+        #adminSidebar h3 { 
+            color: var(--light-sidebar-active-text); 
+            text-align: left; 
+            border-bottom: 1px solid var(--light-sidebar-hover-bg); 
+            padding-bottom: 8px; margin-top: 0; 
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        body.dark-theme #adminSidebar h3 { color: var(--dark-sidebar-active-text); border-bottom-color: var(--dark-sidebar-hover-bg); }
+
+        #adminSidebar ul { list-style: none; padding: 0; margin: 15px 0 0 0; }
+        #adminSidebar ul li a { 
+            display: flex; 
+            align-items: center; 
+            padding: 10px 12px; 
+            color: var(--light-sidebar-text); 
+            text-decoration: none; 
+            border-radius: 4px; 
+            margin-bottom: 4px; 
+            transition: background-color 0.2s ease, color 0.2s ease; 
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        body.dark-theme #adminSidebar ul li a { color: var(--dark-sidebar-text); }
+
+        #adminSidebar ul li a .menu-icon {
+            margin-right: 8px; 
+            font-size: 1em; 
+        }
+        #adminSidebar ul li a:hover, #adminSidebar ul li a.active { background-color: var(--light-sidebar-hover-bg); color: var(--light-sidebar-active-text); }
+        body.dark-theme #adminSidebar ul li a:hover, body.dark-theme #adminSidebar ul li a.active { background-color: var(--dark-sidebar-hover-bg); color: var(--dark-sidebar-active-text); }
+        
+        #adminMainContent { 
+            flex-grow: 1; 
+            padding: 15px; 
+            background-color: var(--light-section-bg); 
+            border-radius: 8px; 
+            overflow-y: auto; 
+            transition: background-color 0.5s ease, margin-left 0.3s ease;
+            margin-left: 0; 
+        }
+        body.dark-theme #adminMainContent { background-color: var(--dark-section-bg); }
+
+        #sidebarToggle { 
+            position: fixed; 
+            top: 15px;  
+            left: 15px; 
+            font-size: 22px; 
+            cursor: pointer; 
+            z-index: 1000; 
+            color: #fff; 
+            background-color: var(--light-primary-color); 
+            padding: 6px 9px; 
+            border-radius: 5px; 
+        }
+        body.dark-theme #sidebarToggle { background-color: var(--dark-primary-color); }
+
+        
+        .customer-list-item .details p { margin: 4px 0; font-size: 0.9em;}
+        .customer-list-item .actions .action-btn {
+            font-size: 0.85em;
+            padding: 6px 10px;
+            width: auto;
+            margin-left: 8px;
+            background: #6c757d;
+            font-weight: 500;
+        }
+         .customer-list-item .actions .action-btn:hover {
+            background: #5a6268;
+        }
+        .customer-list-item { display: flex; justify-content: space-between; align-items: center; }
+        
+        #editCustomerFormContainer { background-color: color-mix(in srgb, var(--light-section-bg) 90%, black); padding: 15px; border-radius: 8px; }
+        body.dark-theme #editCustomerFormContainer { background-color: color-mix(in srgb, var(--dark-section-bg) 90%, #fff); }
+
+        .top-controls {
+            position: fixed;
+            top: 15px; 
+            right: 15px;
+            display: flex;
+            gap: 8px; 
+            z-index: 1001;
+        }
+
+        #themeToggleBtn, #languageToggleBtn {
+            padding: 6px 10px; 
+            background-color: var(--light-primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85em; 
+            font-family: var(--font-primary);
+            font-weight: 500;
+        }
+        body.dark-theme #themeToggleBtn, body.dark-theme #languageToggleBtn { 
+            background-color: var(--dark-primary-color); 
+            color: #121212; 
+        }
+
+        @media (min-width: 769px) { 
+            body {
+                font-size: 16px;
+                padding: 20px;
+            }
+            .app-header { margin-bottom: 20px; padding-top: 20px; }
+            .company-name-display { font-size: 2.8em; padding: 10px 0; }
+            .login-page-logo-container img { max-width: 150px; }
+            .login-page-company-name { font-size: 1.5em; }
+            .container { padding: 30px; }
+            body.on-login-page .container { max-width: 450px; margin-top: 0;} 
+            .dashboard-header h2 { font-size: 1.6em; }
+            .text-logout-btn { padding: 6px 12px; font-size: 0.9em; }
+            h1 { font-size: 1.8em; }
+            .section { padding: 20px; margin-bottom: 25px; }
+            label { margin-bottom: 8px; }
+            input[type="text"], input[type="password"], input[type="date"], select {
+                width: calc(100% - 24px); padding: 12px; margin-bottom: 15px; font-size: 1em;
+            }
+            button, .action-btn { padding: 12px 20px; font-size: 1.05em; }
+            .complaint-item, .customer-list-item { padding: 15px; margin-bottom: 10px; }
+            .expiring-customer-item p { font-size: 1em; }
+            .error-message, .success-message { font-size: 0.9em; margin-top: 10px; }
+            .customer-info p { font-size: 1.1em; }
+            
+            #adminSidebar {
+                position: static; 
+                left: 0;
+                transform: translateX(0);
+                height: auto; 
+                width: 250px;
+                 min-height: calc(100vh - 150px); 
+            }
+            #adminSidebar.open { 
+                transform: translateX(0);
+            }
+            #adminMainContent {
+                margin-left: 250px; 
+                border-radius: 0 8px 8px 0; 
+            }
+            #sidebarToggle {
+                display: none; 
+            }
+        }
+        @media (max-width: 768px) { 
+             #adminMainContent.sidebar-open {
+                filter: blur(2px) brightness(0.7); 
+             }
+        }
+
+    </style>
+</head>
+<body class="on-login-page"> 
+    <div class="app-header hidden" id="appHeaderGlobal"> 
+        <div id="companyNameDisplay" class="company-name-display">SHIV SECURE SOLUTIONS</div>
+    </div>
+    <div class="top-controls">
+        <button id="themeToggleBtn" data-lang-key="themeToggleDark">🌙 डार्क थीम</button>
+        <button id="languageToggleBtn" data-lang-key="languageToggleEn">English</button>
+    </div>
+
+    <div class="container" id="mainContainer">
+        
+        <div id="sidebarToggle" class="hidden">&#9776;</div> 
+
+        <div id="loginSection" class="section">
+            <div class="login-page-logo-container">
+                <img id="companyLogoLogin" src="https://i.postimg.cc/xTh55RgQ/1748193531734.png" alt="Company Logo">
+                <div class="login-page-company-name">SHIV SECURE SOLUTIONS</div>
+            </div>
+            <h1 data-lang-key="systemLoginTitle">सिस्टम लॉगिन</h1>
+            <form id="loginForm">
+                <label for="username" data-lang-key="usernameLabel">यूजरनेम:</label>
+                <input type="text" id="username" required>
+                <label for="password" data-lang-key="passwordLabel">पासवर्ड:</label>
+                <input type="password" id="password" required>
+                <button type="submit" data-lang-key="loginButton">लॉगिन</button>
+                <p id="loginError" class="error-message hidden"></p>
+            </form>
+        </div>
+
+        <!-- Admin Dashboard Section -->
+        <div id="adminDashboardSection" class="hidden"> 
+             <nav id="adminSidebar">
+                <h3 data-lang-key="adminMenuTitle">एडमिन मेनू</h3>
+                <ul>
+                    <li><a href="#" data-target="adminSummarySection"><span class="menu-icon">📊</span> <span data-lang-key="adminMenuSummary">डैशबोर्ड सारांश</span></a></li>
+                    <li><a href="#" data-target="adminAddCustomerSection"><span class="menu-icon">👤</span> <span data-lang-key="adminMenuAddCustomer">नया ग्राहक जोड़ें</span></a></li>
+                    <li><a href="#" data-target="adminManageCustomersSection"><span class="menu-icon">⚙️</span> <span data-lang-key="adminMenuManageCustomers">ग्राहक प्रबंधित करें</span></a></li>
+                    <li><a href="#" data-target="adminViewComplaintsSection"><span class="menu-icon">⚠️</span> <span data-lang-key="adminMenuViewComplaints">शिकायतें देखें</span></a></li>
+                    <li><a href="#" data-target="adminProfileSection"><span class="menu-icon">🔑</span> <span data-lang-key="adminMenuProfile">प्रोफ़ाइल / पासवर्ड</span></a></li>
+                </ul>
+            </nav>
+            <main id="adminMainContent">
+                <div class="dashboard-header" id="adminDashboardHeader"> 
+                    <h2 data-lang-key="adminDashboardTitle">एडमिन डैशबोर्ड</h2>
+                    <button id="adminLogoutBtn" class="text-logout-btn" data-lang-key="logoutButton">LOGOUT</button> 
+                </div>
+                
+                <div id="adminSummarySection" class="admin-content-section section">
+                    <h3 data-lang-key="adminSummaryTitle">डैशबोर्ड सारांश</h3>
+                    <p><strong data-lang-key="totalRegisteredCustomers">कुल पंजीकृत ग्राहक:</strong> <span id="totalUsersCount">0</span></p>
+                    
+                    <div class="section hidden" id="expiringCustomersSection"> 
+                        <h4 data-lang-key="expiringSoonTitle">जल्द समाप्त होने वाले ग्राहक (अगले 2 दिन)</h4>
+                        <div id="expiringCustomersList">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="adminAddCustomerSection" class="admin-content-section section hidden">
+                    <h3 data-lang-key="addNewCustomerTitle">नया ग्राहक जोड़ें</h3>
+                    <form id="addCustomerForm">
+                        <label for="customerName" data-lang-key="customerNameLabel">ग्राहक का नाम:</label>
+                        <input type="text" id="customerName" required>
+                        <label for="customerUsername" data-lang-key="customerUsernameLabel">ग्राहक यूजरनेम:</label>
+                        <input type="text" id="customerUsername" required>
+                        <label for="customerPassword" data-lang-key="customerPasswordLabel">ग्राहक पासवर्ड:</label>
+                        <input type="text" id="customerPassword" required>
+                        <label for="customerPlan" data-lang-key="internetPlanLabel">इंटरनेट प्लान:</label>
+                        <select id="customerPlan" required>
+                            <option value="" data-lang-key="selectPlanOption">-- प्लान चुनें --</option>
+                            <option value="60 Mbps">60 Mbps</option>
+                            <option value="100 Mbps">100 Mbps</option>
+                            <option value="300 Mbps">300 Mbps</option>
+                        </select>
+                        <label for="customerExpiryDate" data-lang-key="expiryDateLabel">समाप्ति तिथि:</label>
+                        <input type="date" id="customerExpiryDate" required>
+                        <button type="submit" data-lang-key="addCustomerButton">ग्राहक जोड़ें</button>
+                        <p id="addCustomerMessage" class="hidden"></p>
+                    </form>
+                </div>
+
+                <div id="adminManageCustomersSection" class="admin-content-section section hidden">
+                    <h3 data-lang-key="manageCustomersTitle">ग्राहक प्रबंधित करें</h3>
+                    <div id="adminCustomerListContainer">
+                    </div>
+                    <div id="editCustomerFormContainer" class="section hidden">
+                        <h4 data-lang-key="editCustomerDetailsTitle">ग्राहक विवरण संपादित करें</h4>
+                        <form id="editCustomerForm">
+                            <input type="hidden" id="editCustomerId">
+                            <label for="editCustomerName" data-lang-key="customerNameLabel">ग्राहक का नाम:</label>
+                            <input type="text" id="editCustomerName" required>
+                            <label for="editCustomerUsername" data-lang-key="customerUsernameNonEditableLabel">ग्राहक यूजरनेम (बदला नहीं जा सकता):</label>
+                            <input type="text" id="editCustomerUsername" readonly>
+                            <label for="editCustomerPassword" data-lang-key="newPasswordOptionalLabel">नया पासवर्ड (यदि नहीं बदलना है तो खाली छोड़ दें):</label>
+                            <input type="text" id="editCustomerPassword" data-lang-placeholder-key="newPasswordPlaceholder" placeholder="नया पासवर्ड">
+                            <label for="editCustomerPlan" data-lang-key="internetPlanLabel">इंटरनेट प्लान:</label>
+                            <select id="editCustomerPlan" required>
+                                <option value="" data-lang-key="selectPlanOption">-- प्लान चुनें --</option>
+                                <option value="60 Mbps">60 Mbps</option>
+                                <option value="100 Mbps">100 Mbps</option>
+                                <option value="300 Mbps">300 Mbps</option>
+                            </select>
+                            <label for="editCustomerExpiryDate" data-lang-key="expiryDateLabel">समाप्ति तिथि:</label>
+                            <input type="date" id="editCustomerExpiryDate" required>
+                            <button type="submit" data-lang-key="saveChangesButton">बदलाव सहेजें</button>
+                            <button type="button" id="cancelEditCustomerBtn" class="action-btn" style="background: #6c757d; margin-top:10px;" data-lang-key="cancelButton">रद्द करें</button>
+                            <p id="editCustomerMessage" class="hidden"></p>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div id="adminViewComplaintsSection" class="admin-content-section section hidden">
+                    <h3 data-lang-key="complaintsTitle">शिकायतें</h3>
+                    <h4 data-lang-key="pendingComplaintsTitle">लंबित शिकायतें</h4>
+                    <div id="adminPendingComplaintsList">
+                        <p data-lang-key="noPendingComplaints">कोई लंबित शिकायत नहीं।</p>
+                    </div>
+                    <hr style="margin: 20px 0;">
+                    <h4 data-lang-key="solvedComplaintsTitle">हल की गई शिकायतें</h4>
+                    <div id="adminSolvedComplaintsList">
+                        <p data-lang-key="noSolvedComplaints">कोई हल की गई शिकायत नहीं।</p>
+                    </div>
+                </div>
+
+                <div id="adminProfileSection" class="admin-content-section section hidden">
+                    <h3 data-lang-key="profileAndPasswordTitle">प्रोफ़ाइल और पासवर्ड बदलें</h3>
+                    <form id="changeAdminPasswordForm">
+                        <label for="currentAdminPassword" data-lang-key="currentPasswordLabel">वर्तमान पासवर्ड:</label>
+                        <input type="password" id="currentAdminPassword" required>
+                        <label for="newAdminPassword" data-lang-key="newPasswordLabel">नया पासवर्ड:</label>
+                        <input type="password" id="newAdminPassword" required>
+                        <label for="confirmNewAdminPassword" data-lang-key="confirmNewPasswordLabel">नए पासवर्ड की पुष्टि करें:</label>
+                        <input type="password" id="confirmNewAdminPassword" required>
+                        <button type="submit" data-lang-key="changePasswordButton">पासवर्ड बदलें</button>
+                        <p id="changeAdminPasswordMessage" class="hidden"></p>
+                    </form>
+                </div>
+
+            </main>
+        </div>
+        
+        <!-- Customer Dashboard Section -->
+        <div id="customerDashboardSection" class="section hidden">
+             <div class="dashboard-header"> 
+                <h2 data-lang-key="customerDashboardTitle">ग्राहक डैशबोर्ड</h2>
+                <button id="customerLogoutBtn" class="text-logout-btn" data-lang-key="logoutButton">LOGOUT</button>
+            </div>
+            <div class="section customer-info">
+                <h3 data-lang-key="yourInformationTitle">आपकी जानकारी</h3>
+                <p><strong data-lang-key="nameLabel">नाम:</strong> <span id="loggedInCustomerName"></span></p>
+                <p><strong data-lang-key="internetPlanLabel">इंटरनेट प्लान:</strong> <span id="loggedInCustomerPlan"></span></p>
+                <p><strong data-lang-key="expiryDateLabel">समाप्ति तिथि:</strong> <span id="loggedInCustomerExpiryDate"></span></p>
+            </div>
+            <div class="section">
+                <h3 data-lang-key="registerNewComplaintTitle">नई शिकायत दर्ज करें</h3>
+                <form id="submitComplaintForm">
+                    <label for="complaintType" data-lang-key="complaintTypeLabel">शिकायत का प्रकार:</label>
+                    <select id="complaintType">
+                        <option value="Internet not working" data-lang-key="complaintTypeNotWorking">इंटरनेट काम नहीं कर रहा है</option>
+                        <option value="Speed Slow" data-lang-key="complaintTypeSlowSpeed">स्पीड धीमी है</option>
+                        <option value="Other" data-lang-key="complaintTypeOther">अन्य</option>
+                    </select>
+                    <div id="otherComplaintDetailsDiv" class="hidden">
+                        <label for="otherComplaintDetails" data-lang-key="otherDetailsLabel">अन्य विवरण:</label>
+                        <input type="text" id="otherComplaintDetails">
+                    </div>
+                    <button type="submit" id="submitComplaintBtn" data-lang-key="submitComplaintButton">शिकायत भेजें</button>
+                    <p id="complaintSubmitMessage" class="hidden"></p>
+                </form>
+            </div>
+            <div class="section">
+                <h3 data-lang-key="yourComplaintsTitle">आपकी शिकायतें</h3>
+                <div id="customerComplaintsList">
+                    <p data-lang-key="noComplaintsRegistered">आपकी कोई शिकायत दर्ज नहीं है।</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Language Data & All previous JS ---
+        // ... (पूरा JavaScript कोड यहाँ आएगा, जैसा पिछले उत्तर में था) ...
+         const langData = {
+            hi: {
+                appTitle: "इंटरनेट शिकायत प्रणाली - SHIV SECURE SOLUTIONS",
+                themeToggleDark: "🌙 डार्क थीम",
+                themeToggleLight: "☀️ लाइट थीम",
+                languageToggleEn: "English",
+                languageToggleHi: "हिन्दी",
+                systemLoginTitle: "सिस्टम लॉगिन",
+                usernameLabel: "यूजरनेम:",
+                passwordLabel: "पासवर्ड:",
+                loginButton: "लॉगिन",
+                adminMenuTitle: "एडमिन मेनू",
+                adminMenuSummary: "डैशबोर्ड सारांश",
+                adminMenuAddCustomer: "नया ग्राहक जोड़ें",
+                adminMenuManageCustomers: "ग्राहक प्रबंधित करें",
+                adminMenuViewComplaints: "शिकायतें देखें",
+                adminMenuProfile: "प्रोफ़ाइल / पासवर्ड",
+                adminDashboardTitle: "एडमिन डैशबोर्ड",
+                logoutButton: "LOGOUT",
+                adminSummaryTitle: "डैशबोर्ड सारांश",
+                totalRegisteredCustomers: "कुल पंजीकृत ग्राहक:",
+                expiringSoonTitle: "जल्द समाप्त होने वाले ग्राहक (अगले 2 दिन)",
+                noCustomersExpiringSoon: "फिलहाल कोई ग्राहक जल्द समाप्त नहीं हो रहा है।",
+                customerUsernameColumn: "यूजरनेम",
+                customerNameColumn: "नाम",
+                expiryDateColumn: "समाप्ति तिथि",
+                daysLeftColumn: "शेष दिन",
+                todayLabel: "आज",
+                addNewCustomerTitle: "नया ग्राहक जोड़ें",
+                customerNameLabel: "ग्राहक का नाम:",
+                customerUsernameLabel: "ग्राहक यूजरनेम:",
+                customerPasswordLabel: "ग्राहक पासवर्ड:",
+                internetPlanLabel: "इंटरनेट प्लान:",
+                selectPlanOption: "-- प्लान चुनें --",
+                expiryDateLabel: "समाप्ति तिथि:",
+                addCustomerButton: "ग्राहक जोड़ें",
+                manageCustomersTitle: "ग्राहक प्रबंधित करें",
+                editCustomerDetailsTitle: "ग्राहक विवरण संपादित करें",
+                customerUsernameNonEditableLabel: "ग्राहक यूजरनेम (बदला नहीं जा सकता):",
+                newPasswordOptionalLabel: "नया पासवर्ड (यदि नहीं बदलना है तो खाली छोड़ दें):",
+                newPasswordPlaceholder: "नया पासवर्ड",
+                saveChangesButton: "बदलाव सहेजें",
+                cancelButton: "रद्द करें",
+                complaintsTitle: "शिकायतें",
+                pendingComplaintsTitle: "लंबित शिकायतें",
+                noPendingComplaints: "कोई लंबित शिकायत नहीं।",
+                solvedComplaintsTitle: "हल की गई शिकायतें",
+                noSolvedComplaints: "कोई हल की गई शिकायत नहीं।",
+                profileAndPasswordTitle: "प्रोफ़ाइल और पासवर्ड बदलें",
+                currentPasswordLabel: "वर्तमान पासवर्ड:",
+                newPasswordLabel: "नया पासवर्ड:",
+                confirmNewPasswordLabel: "नए पासवर्ड की पुष्टि करें:",
+                changePasswordButton: "पासवर्ड बदलें",
+                customerDashboardTitle: "ग्राहक डैशबोर्ड",
+                yourInformationTitle: "आपकी जानकारी",
+                nameLabel: "नाम:",
+                registerNewComplaintTitle: "नई शिकायत दर्ज करें",
+                complaintTypeLabel: "शिकायत का प्रकार:",
+                complaintTypeNotWorking: "इंटरनेट काम नहीं कर रहा है",
+                complaintTypeSlowSpeed: "स्पीड धीमी है",
+                complaintTypeOther: "अन्य",
+                otherDetailsLabel: "अन्य विवरण:",
+                submitComplaintButton: "शिकायत भेजें",
+                yourComplaintsTitle: "आपकी शिकायतें",
+                noComplaintsRegistered: "आपकी कोई शिकायत दर्ज नहीं है।",
+                errorIncorrectCredentials: "गलत यूजरनेम या पासवर्ड।",
+                errorUsernameExists: "यह यूजरनेम पहले से मौजूद है।",
+                successCustomerAdded: (name) => `ग्राहक '${name}' सफलतापूर्वक जोड़ा गया।`,
+                errorFillAllFields: "कृपया सभी फ़ील्ड भरें।",
+                errorCurrentPasswordIncorrect: "वर्तमान पासवर्ड गलत है।",
+                errorNewPasswordMinLength: "नया पासवर्ड कम से कम 6 अक्षरों का होना चाहिए।",
+                errorPasswordsMismatch: "नया पासवर्ड और पुष्टि पासवर्ड मेल नहीं खाते।",
+                successPasswordChanged: "पासवर्ड सफलतापूर्वक बदल दिया गया है।",
+                successCustomerUpdated: "ग्राहक विवरण सफलतापूर्वक अपडेट किया गया।",
+                errorCustomerNotFound: "ग्राहक नहीं मिला।",
+                errorPendingComplaintExists: "आपकी एक शिकायत पहले से ही लंबित है। कृपया उसके समाधान की प्रतीक्षा करें।",
+                errorOtherComplaintDetails: "कृपया \"अन्य\" शिकायत के लिए विवरण प्रदान करें।",
+                successComplaintRegistered: "आपकी शिकायत सफलतापूर्वक दर्ज की गई।",
+                markAsSolvedButton: "हल किया गया चिह्नित करें",
+                detailsLabel: "विवरण:",
+                statusLabel: "स्थिति:",
+                statusPending: "लंबित",
+                statusSolved: "हल हो गई",
+                dateRegisteredLabel: "दर्ज तिथि:",
+                dateSolvedLabel: "हल तिथि:",
+                unknownCustomer: "अज्ञात",
+                noCustomersFound: "कोई ग्राहक नहीं मिला।",
+                editButton: "संपादित करें",
+                daysLeftSuffix: " दिन"
+            },
+            en: {
+                appTitle: "Internet Complaint System - SHIV SECURE SOLUTIONS",
+                themeToggleDark: "🌙 Dark Theme",
+                themeToggleLight: "☀️ Light Theme",
+                languageToggleEn: "English",
+                languageToggleHi: "हिन्दी",
+                systemLoginTitle: "System Login",
+                usernameLabel: "Username:",
+                passwordLabel: "Password:",
+                loginButton: "Login",
+                adminMenuTitle: "Admin Menu",
+                adminMenuSummary: "Dashboard Summary",
+                adminMenuAddCustomer: "Add New Customer",
+                adminMenuManageCustomers: "Manage Customers",
+                adminMenuViewComplaints: "View Complaints",
+                adminMenuProfile: "Profile / Password",
+                adminDashboardTitle: "Admin Dashboard",
+                logoutButton: "LOGOUT",
+                adminSummaryTitle: "Dashboard Summary",
+                totalRegisteredCustomers: "Total Registered Customers:",
+                expiringSoonTitle: "Customers Expiring Soon (Next 2 Days)",
+                noCustomersExpiringSoon: "No customers expiring soon at the moment.",
+                customerUsernameColumn: "Username",
+                customerNameColumn: "Name",
+                expiryDateColumn: "Expiry Date",
+                daysLeftColumn: "Days Left",
+                todayLabel: "Today",
+                addNewCustomerTitle: "Add New Customer",
+                customerNameLabel: "Customer Name:",
+                customerUsernameLabel: "Customer Username:",
+                customerPasswordLabel: "Customer Password:",
+                internetPlanLabel: "Internet Plan:",
+                selectPlanOption: "-- Select Plan --",
+                expiryDateLabel: "Expiry Date:",
+                addCustomerButton: "Add Customer",
+                manageCustomersTitle: "Manage Customers",
+                editCustomerDetailsTitle: "Edit Customer Details",
+                customerUsernameNonEditableLabel: "Customer Username (cannot be changed):",
+                newPasswordOptionalLabel: "New Password (leave blank if not changing):",
+                newPasswordPlaceholder: "New Password",
+                saveChangesButton: "Save Changes",
+                cancelButton: "Cancel",
+                complaintsTitle: "Complaints",
+                pendingComplaintsTitle: "Pending Complaints",
+                noPendingComplaints: "No pending complaints.",
+                solvedComplaintsTitle: "Solved Complaints",
+                noSolvedComplaints: "No solved complaints.",
+                profileAndPasswordTitle: "Profile & Change Password",
+                currentPasswordLabel: "Current Password:",
+                newPasswordLabel: "New Password:",
+                confirmNewPasswordLabel: "Confirm New Password:",
+                changePasswordButton: "Change Password",
+                customerDashboardTitle: "Customer Dashboard",
+                yourInformationTitle: "Your Information",
+                nameLabel: "Name:",
+                registerNewComplaintTitle: "Register New Complaint",
+                complaintTypeLabel: "Complaint Type:",
+                complaintTypeNotWorking: "Internet not working",
+                complaintTypeSlowSpeed: "Speed Slow",
+                complaintTypeOther: "Other",
+                otherDetailsLabel: "Other Details:",
+                submitComplaintButton: "Submit Complaint",
+                yourComplaintsTitle: "Your Complaints",
+                noComplaintsRegistered: "No complaints registered by you.",
+                errorIncorrectCredentials: "Incorrect username or password.",
+                errorUsernameExists: "This username already exists.",
+                successCustomerAdded: (name) => `Customer '${name}' added successfully.`,
+                errorFillAllFields: "Please fill all fields.",
+                errorCurrentPasswordIncorrect: "Current password is incorrect.",
+                errorNewPasswordMinLength: "New password must be at least 6 characters long.",
+                errorPasswordsMismatch: "New password and confirm password do not match.",
+                successPasswordChanged: "Password changed successfully.",
+                successCustomerUpdated: "Customer details updated successfully.",
+                errorCustomerNotFound: "Customer not found.",
+                errorPendingComplaintExists: "You already have a pending complaint. Please wait for it to be resolved.",
+                errorOtherComplaintDetails: "Please provide details for \"Other\" complaint.",
+                successComplaintRegistered: "Your complaint has been registered successfully.",
+                markAsSolvedButton: "Mark as Solved",
+                detailsLabel: "Details:",
+                statusLabel: "Status:",
+                statusPending: "Pending",
+                statusSolved: "Solved",
+                dateRegisteredLabel: "Date Registered:",
+                dateSolvedLabel: "Date Solved:",
+                unknownCustomer: "Unknown",
+                noCustomersFound: "No customers found.",
+                editButton: "Edit",
+                daysLeftSuffix: " days"
+            }
+        };
+
+        let currentLang = localStorage.getItem('ispAppLanguage') || 'hi'; 
+
+        const getFromStorage = (key) => JSON.parse(localStorage.getItem(key)) || [];
+        const saveToStorage = (key, data) => localStorage.setItem(key, JSON.stringify(data));
+
+        let adminCredentials = JSON.parse(localStorage.getItem('ispAdminCredentials')) || {
+            username: 'admin',
+            password: 'password'
+        };
+        const saveAdminCredentials = () => localStorage.setItem('ispAdminCredentials', JSON.stringify(adminCredentials));
+
+
+        let customers = getFromStorage('ispCustomers');
+        let complaints = getFromStorage('ispComplaints');
+        let loggedInUserType = null; 
+        let loggedInUserId = null; 
+
+        const mainContainer = document.getElementById('mainContainer');
+        const loginSection = document.getElementById('loginSection');
+        const adminDashboardSection = document.getElementById('adminDashboardSection');
+        const customerDashboardSection = document.getElementById('customerDashboardSection');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const adminSidebar = document.getElementById('adminSidebar');
+        const adminMainContent = document.getElementById('adminMainContent'); 
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const languageToggleBtn = document.getElementById('languageToggleBtn');
+        const appHeaderGlobal = document.getElementById('appHeaderGlobal'); 
+        
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+        
+        const totalUsersCount = document.getElementById('totalUsersCount');
+        const expiringCustomersSection = document.getElementById('expiringCustomersSection'); 
+        const expiringCustomersListDiv = document.getElementById('expiringCustomersList'); 
+        const addCustomerForm = document.getElementById('addCustomerForm');
+        const addCustomerMessage = document.getElementById('addCustomerMessage');
+        const adminPendingComplaintsList = document.getElementById('adminPendingComplaintsList');
+        const adminSolvedComplaintsList = document.getElementById('adminSolvedComplaintsList');
+        const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+
+        const adminSummaryPanel = document.getElementById('adminSummarySection');
+        const adminAddCustomerPanel = document.getElementById('adminAddCustomerSection');
+        const adminManageCustomersPanel = document.getElementById('adminManageCustomersSection');
+        const adminViewComplaintsPanel = document.getElementById('adminViewComplaintsSection');
+        const adminProfilePanel = document.getElementById('adminProfileSection'); 
+        const allAdminContentPanels = [adminSummaryPanel, adminAddCustomerPanel, adminManageCustomersPanel, adminViewComplaintsPanel, adminProfilePanel];
+        
+        const adminCustomerListContainer = document.getElementById('adminCustomerListContainer');
+        const editCustomerFormContainer = document.getElementById('editCustomerFormContainer');
+        const editCustomerForm = document.getElementById('editCustomerForm');
+        const editCustomerId = document.getElementById('editCustomerId');
+        const editCustomerName = document.getElementById('editCustomerName');
+        const editCustomerUsername = document.getElementById('editCustomerUsername');
+        const editCustomerPassword = document.getElementById('editCustomerPassword');
+        const editCustomerPlan = document.getElementById('editCustomerPlan');
+        const editCustomerExpiryDate = document.getElementById('editCustomerExpiryDate');
+        const editCustomerMessage = document.getElementById('editCustomerMessage');
+        const cancelEditCustomerBtn = document.getElementById('cancelEditCustomerBtn');
+
+        const changeAdminPasswordForm = document.getElementById('changeAdminPasswordForm');
+        const currentAdminPasswordInput = document.getElementById('currentAdminPassword');
+        const newAdminPasswordInput = document.getElementById('newAdminPassword');
+        const confirmNewAdminPasswordInput = document.getElementById('confirmNewAdminPassword');
+        const changeAdminPasswordMessage = document.getElementById('changeAdminPasswordMessage');
+
+
+        const loggedInCustomerName = document.getElementById('loggedInCustomerName');
+        const loggedInCustomerPlan = document.getElementById('loggedInCustomerPlan');
+        const loggedInCustomerExpiryDate = document.getElementById('loggedInCustomerExpiryDate');
+        const submitComplaintForm = document.getElementById('submitComplaintForm');
+        const complaintTypeSelect = document.getElementById('complaintType'); 
+        const otherComplaintDetailsDiv = document.getElementById('otherComplaintDetailsDiv');
+        const otherComplaintDetails = document.getElementById('otherComplaintDetails');
+        const submitComplaintBtn = document.getElementById('submitComplaintBtn');
+        const complaintSubmitMessage = document.getElementById('complaintSubmitMessage');
+        const customerComplaintsList = document.getElementById('customerComplaintsList');
+        const customerLogoutBtn = document.getElementById('customerLogoutBtn');
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-GB'); 
+        }
+
+        function setPageContext(pageClass) {
+            document.body.classList.remove('on-login-page', 'on-admin-dashboard', 'on-customer-dashboard');
+            if (pageClass) {
+                document.body.classList.add(pageClass);
+            }
+            if (pageClass === 'on-login-page') {
+                appHeaderGlobal.classList.add('hidden'); 
+                if (adminSidebar) adminSidebar.classList.remove('open'); 
+                if (adminMainContent) adminMainContent.classList.remove('sidebar-open');
+
+            } else {
+                appHeaderGlobal.classList.remove('hidden'); 
+            }
+        }
+
+        function applyLanguage(lang) {
+            document.documentElement.lang = lang; 
+            const elements = document.querySelectorAll('[data-lang-key]');
+            elements.forEach(el => {
+                const key = el.dataset.langKey;
+                if (langData[lang] && langData[lang][key]) {
+                    if (el.tagName === 'INPUT' && el.type === 'submit' || el.tagName === 'BUTTON' && !el.id.includes('ToggleBtn')) { 
+                         el.textContent = langData[lang][key]; 
+                    } else if (el.tagName === 'INPUT' && el.dataset.langPlaceholderKey) {
+                        const placeholderKey = el.dataset.langPlaceholderKey;
+                         el.placeholder = langData[lang][placeholderKey] || el.placeholder;
+                    }
+                    else {
+                        const iconSpan = el.querySelector('.menu-icon');
+                        if (iconSpan && el.parentElement.parentElement.id === 'adminSidebar') {
+                             el.childNodes[iconSpan ? 1 : 0].nodeValue = ` ${langData[lang][key]}`; 
+                        } else {
+                            el.innerHTML = langData[lang][key]; 
+                        }
+                    }
+                }
+            });
+            
+            if (lang === 'hi') {
+                languageToggleBtn.textContent = langData.hi.languageToggleEn;
+            } else {
+                languageToggleBtn.textContent = langData.en.languageToggleHi;
+            }
+            
+            if (document.body.classList.contains('dark-theme')) {
+                 themeToggleBtn.textContent = langData[currentLang].themeToggleLight;
+            } else {
+                 themeToggleBtn.textContent = langData[currentLang].themeToggleDark;
+            }
+
+            if (complaintTypeSelect) {
+                complaintTypeSelect.options[0].textContent = langData[lang].complaintTypeNotWorking;
+                complaintTypeSelect.options[1].textContent = langData[lang].complaintTypeSlowSpeed;
+                complaintTypeSelect.options[2].textContent = langData[lang].complaintTypeOther;
+            }
+            
+            const noPendingP = adminPendingComplaintsList.querySelector('p[data-lang-key="noPendingComplaints"]');
+            if (noPendingP && (!complaints || complaints.filter(c => c.status === 'pending').length === 0) ) { 
+                 noPendingP.textContent = langData[lang].noPendingComplaints;
+            }
+
+            const noSolvedP = adminSolvedComplaintsList.querySelector('p[data-lang-key="noSolvedComplaints"]');
+            if (noSolvedP && (!complaints || complaints.filter(c => c.status === 'solved').length === 0)) {
+                noSolvedP.textContent = langData[lang].noSolvedComplaints;
+            }
+
+            const noCustComplaintsP = customerComplaintsList.querySelector('p[data-lang-key="noComplaintsRegistered"]');
+            if (noCustComplaintsP && (!loggedInUserId || !complaints || complaints.filter(c => c.customerId === loggedInUserId).length === 0)) {
+                 noCustComplaintsP.textContent = langData[lang].noComplaintsRegistered;
+            }
+            
+            const noExpiringP = expiringCustomersListDiv.querySelector('p[data-lang-key="noCustomersExpiringSoon"]');
+             if (noExpiringP && (!customers || customers.filter(customer => { 
+                if (!customer.expiryDate) return false;
+                const expiry = new Date(customer.expiryDate);
+                const today = new Date();
+                today.setHours(0,0,0,0);
+                expiry.setHours(0,0,0,0);
+                const diffTime = expiry - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                return diffDays >= 0 && diffDays <= 2;
+            }).length === 0)) {
+                expiringCustomersSection.classList.add('hidden'); 
+             } else { // If there are expiring customers, ensure section is visible
+                const expiringSoonCount = customers.filter(customer => {
+                    if (!customer.expiryDate) return false;
+                    const expiry = new Date(customer.expiryDate);
+                    const today = new Date();
+                    today.setHours(0,0,0,0);
+                    expiry.setHours(0,0,0,0);
+                    const diffTime = expiry - today;
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    return diffDays >= 0 && diffDays <= 2;
+                }).length;
+                if (expiringSoonCount > 0) {
+                    expiringCustomersSection.classList.remove('hidden');
+                } else {
+                    expiringCustomersSection.classList.add('hidden');
+                }
+             }
+        }
+
+        languageToggleBtn.addEventListener('click', () => {
+            currentLang = (currentLang === 'hi') ? 'en' : 'hi';
+            localStorage.setItem('ispAppLanguage', currentLang);
+            applyLanguage(currentLang);
+            if (!adminDashboardSection.classList.contains('hidden')) {
+                renderAdminComplaints();
+                renderCustomerListForAdmin();
+                renderExpiringCustomers();
+            }
+            if(!customerDashboardSection.classList.contains('hidden') && loggedInUserId) { 
+                renderCustomerComplaints(loggedInUserId);
+            }
+        });
+
+
+        function showMainSection(sectionIdToShow) {
+            loginSection.classList.add('hidden');
+            adminDashboardSection.classList.add('hidden');
+            customerDashboardSection.classList.add('hidden');
+            sidebarToggle.classList.add('hidden'); 
+            mainContainer.classList.remove('dashboard-container'); 
+
+            if (sectionIdToShow) {
+                const sectionElement = document.getElementById(sectionIdToShow);
+                if (sectionElement) sectionElement.classList.remove('hidden');
+                
+                if (sectionIdToShow === 'loginSection') {
+                    setPageContext('on-login-page');
+                } else if (sectionIdToShow === 'adminDashboardSection') {
+                    mainContainer.classList.add('dashboard-container'); 
+                    if (window.innerWidth <= 768) { 
+                        sidebarToggle.classList.remove('hidden');
+                    } else { 
+                        adminSidebar.classList.remove('open'); 
+                        adminMainContent.classList.remove('sidebar-open');
+                        adminMainContent.style.marginLeft = '250px'; 
+                    }
+                    setPageContext('on-admin-dashboard');
+                    renderExpiringCustomers(); 
+                } else if (sectionIdToShow === 'customerDashboardSection') {
+                    mainContainer.classList.add('dashboard-container');
+                    setPageContext('on-customer-dashboard');
+                }
+            }
+             applyLanguage(currentLang); 
+        }
+
+        function showAdminContent(targetPanelId) {
+            allAdminContentPanels.forEach(panel => {
+                if (panel && panel.id === targetPanelId) panel.classList.remove('hidden');
+                else if (panel) panel.classList.add('hidden');
+            });
+            if (editCustomerFormContainer) editCustomerFormContainer.classList.add('hidden'); 
+
+            document.querySelectorAll('#adminSidebar ul li a').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.target === targetPanelId) link.classList.add('active');
+            });
+
+            if (targetPanelId === 'adminManageCustomersSection') {
+                renderCustomerListForAdmin();
+            }
+            if (targetPanelId === 'adminSummarySection') {
+                renderExpiringCustomers(); 
+            }
+            if (window.innerWidth <= 768 && adminSidebar.classList.contains('open')) { 
+                adminSidebar.classList.remove('open');
+                adminMainContent.classList.remove('sidebar-open');
+                adminMainContent.style.marginLeft = '0';
+            }
+            applyLanguage(currentLang); 
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const usernameVal = document.getElementById('username').value;
+            const passwordVal = document.getElementById('password').value;
+            loginError.classList.add('hidden');
+
+            if (usernameVal === adminCredentials.username && passwordVal === adminCredentials.password) {
+                loggedInUserType = 'admin';
+                loggedInUserId = adminCredentials.username;
+                showMainSection('adminDashboardSection');
+                updateAdminDashboardSummary();
+                renderAdminComplaints(); 
+                showAdminContent('adminSummarySection'); 
+            } else {
+                const customer = customers.find(c => c.username === usernameVal && c.password === passwordVal);
+                if (customer) {
+                    loggedInUserType = 'customer';
+                    loggedInUserId = customer.id;
+                    showMainSection('customerDashboardSection');
+                    displayCustomerInfo(customer);
+                    renderCustomerComplaints(customer.id); 
+                } else {
+                    loginError.textContent = langData[currentLang].errorIncorrectCredentials;
+                    loginError.classList.remove('hidden');
+                }
+            }
+            loginForm.reset();
+        });
+
+        function logout() {
+            loggedInUserType = null;
+            loggedInUserId = null;
+            showMainSection('loginSection');
+            adminSidebar.classList.remove('open'); 
+            adminMainContent.classList.remove('sidebar-open');
+            adminMainContent.style.marginLeft = '0'; 
+        }
+        adminLogoutBtn.addEventListener('click', logout);
+        customerLogoutBtn.addEventListener('click', logout);
+
+        sidebarToggle.addEventListener('click', () => {
+            adminSidebar.classList.toggle('open');
+            adminMainContent.classList.toggle('sidebar-open');
+            if (adminSidebar.classList.contains('open')) {
+                 adminMainContent.style.marginLeft = '0'; 
+            } else {
+                 adminMainContent.style.marginLeft = '0'; 
+            }
+        });
+        
+        document.querySelectorAll('#adminSidebar ul li a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const anchor = e.target.closest('a'); 
+                if (anchor) {
+                    const targetId = anchor.dataset.target;
+                    showAdminContent(targetId);
+                }
+            });
+        });
+
+        changeAdminPasswordForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            changeAdminPasswordMessage.classList.add('hidden');
+            const currentPassword = currentAdminPasswordInput.value;
+            const newPassword = newAdminPasswordInput.value;
+            const confirmPassword = confirmNewAdminPasswordInput.value;
+
+            if (currentPassword !== adminCredentials.password) {
+                changeAdminPasswordMessage.textContent = langData[currentLang].errorCurrentPasswordIncorrect;
+                changeAdminPasswordMessage.className = 'error-message';
+                changeAdminPasswordMessage.classList.remove('hidden');
+                return;
+            }
+            if (newPassword.length < 6) { 
+                changeAdminPasswordMessage.textContent = langData[currentLang].errorNewPasswordMinLength;
+                changeAdminPasswordMessage.className = 'error-message';
+                changeAdminPasswordMessage.classList.remove('hidden');
+                return;
+            }
+            if (newPassword !== confirmPassword) {
+                changeAdminPasswordMessage.textContent = langData[currentLang].errorPasswordsMismatch;
+                changeAdminPasswordMessage.className = 'error-message';
+                changeAdminPasswordMessage.classList.remove('hidden');
+                return;
+            }
+
+            adminCredentials.password = newPassword;
+            saveAdminCredentials(); 
+
+            changeAdminPasswordMessage.textContent = langData[currentLang].successPasswordChanged;
+            changeAdminPasswordMessage.className = 'success-message';
+            changeAdminPasswordMessage.classList.remove('hidden');
+            changeAdminPasswordForm.reset();
+
+            setTimeout(() => {
+                changeAdminPasswordMessage.classList.add('hidden');
+            }, 3000);
+        });
+
+
+        function updateAdminDashboardSummary() {
+            totalUsersCount.textContent = customers.length;
+            renderExpiringCustomers(); 
+        }
+
+        function renderExpiringCustomers() {
+            expiringCustomersListDiv.innerHTML = ''; 
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); 
+
+            const expiringSoon = customers.filter(customer => {
+                if (!customer.expiryDate) return false;
+                const expiry = new Date(customer.expiryDate);
+                expiry.setHours(0,0,0,0); 
+                const diffTime = expiry - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                return diffDays >= 0 && diffDays <= 2; 
+            });
+
+            if (expiringSoon.length === 0) {
+                expiringCustomersSection.classList.add('hidden'); 
+                return;
+            }
+            
+            expiringCustomersSection.classList.remove('hidden'); 
+
+            expiringSoon.sort((a,b) => new Date(a.expiryDate) - new Date(b.expiryDate)); 
+
+            expiringSoon.forEach(customer => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('customer-list-item', 'expiring-customer-item'); 
+                
+                const expiry = new Date(customer.expiryDate);
+                expiry.setHours(0,0,0,0);
+                const diffTime = expiry - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                let daysLeftText = `${diffDays}${langData[currentLang].daysLeftSuffix || ' दिन'}`;
+                if (diffDays === 0) {
+                    daysLeftText = langData[currentLang].todayLabel || 'आज';
+                }
+
+
+                itemDiv.innerHTML = `
+                    <p><strong>${langData[currentLang].customerNameColumn || 'नाम'}:</strong> ${customer.name}</p>
+                    <p><strong>${langData[currentLang].customerUsernameColumn || 'यूजरनेम'}:</strong> ${customer.username}</p>
+                    <p><strong>${langData[currentLang].expiryDateColumn || 'समाप्ति तिथि'}:</strong> ${formatDate(customer.expiryDate)}</p>
+                    <p><strong>${langData[currentLang].daysLeftColumn || 'शेष दिन'}:</strong> ${daysLeftText}</p>
+                `;
+                expiringCustomersListDiv.appendChild(itemDiv);
+            });
+        }
+
+
+        addCustomerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            addCustomerMessage.classList.add('hidden');
+            const name = document.getElementById('customerName').value;
+            const username = document.getElementById('customerUsername').value;
+            const password = document.getElementById('customerPassword').value;
+            const plan = document.getElementById('customerPlan').value;
+            const expiryDate = document.getElementById('customerExpiryDate').value;
+
+            if (!name || !username || !password || !plan || !expiryDate) {
+                addCustomerMessage.textContent = langData[currentLang].errorFillAllFields;
+                addCustomerMessage.className = 'error-message';
+                addCustomerMessage.classList.remove('hidden');
+                return;
+            }
+            if (customers.find(c => c.username === username)) {
+                addCustomerMessage.textContent = langData[currentLang].errorUsernameExists;
+                addCustomerMessage.className = 'error-message';
+                addCustomerMessage.classList.remove('hidden');
+                return;
+            }
+
+            const newCustomer = { id: Date.now().toString(), name, username, password, plan, expiryDate };
+            customers.push(newCustomer);
+            saveToStorage('ispCustomers', customers);
+            updateAdminDashboardSummary(); 
+            addCustomerMessage.textContent = langData[currentLang].successCustomerAdded(name);
+            addCustomerMessage.className = 'success-message';
+            addCustomerMessage.classList.remove('hidden');
+            addCustomerForm.reset();
+            setTimeout(() => { addCustomerMessage.className = 'hidden'; }, 3000);
+        });
+
+        function renderAdminComplaints() {
+            adminPendingComplaintsList.innerHTML = '';
+            adminSolvedComplaintsList.innerHTML = '';
+            
+            const pendingComplaints = complaints.filter(c => c.status === 'pending');
+            const solvedComplaints = complaints.filter(c => c.status === 'solved').sort((a,b) => b.solvedTimestamp - a.solvedTimestamp);
+
+            const listBuilder = (listElement, compList, isPending) => {
+                if (compList.length === 0) {
+                    listElement.innerHTML = `<p data-lang-key="${isPending ? 'noPendingComplaints' : 'noSolvedComplaints'}">${langData[currentLang][isPending ? 'noPendingComplaints' : 'noSolvedComplaints']}</p>`;
+                    return;
+                }
+                compList.forEach(complaint => {
+                    const customer = customers.find(c => c.id === complaint.customerId);
+                    const complaintDiv = document.createElement('div');
+                    complaintDiv.classList.add('complaint-item', complaint.status);
+                    complaintDiv.innerHTML = `
+                        <p><strong>${langData[currentLang].customerNameLabel || 'ग्राहक:'}</strong> ${customer ? customer.name : `${langData[currentLang].unknownCustomer || 'अज्ञात'} (ID: ${complaint.customerId})`}</p>
+                        <p><strong>${langData[currentLang].complaintTypeLabel || 'प्रकार:'}</strong> ${complaint.type}</p>
+                        ${complaint.details ? `<p><strong>${langData[currentLang].detailsLabel || 'विवरण:'}</strong> ${complaint.details}</p>` : ''}
+                        <p><strong>${langData[currentLang].dateRegisteredLabel || 'दर्ज तिथि:'}</strong> ${formatDate(new Date(complaint.timestamp))}</p>
+                        ${isPending ? `<button onclick="solveComplaint('${complaint.id}')" class="action-btn" style="width:auto; font-size:0.9em; padding: 8px 12px; background: #28a745;">${langData[currentLang].markAsSolvedButton || 'हल किया गया चिह्नित करें'}</button>` 
+                                     : `<p><strong>${langData[currentLang].dateSolvedLabel || 'हल तिथि:'}</strong> ${formatDate(new Date(complaint.solvedTimestamp))}</p>`}
+                    `;
+                    listElement.appendChild(complaintDiv);
+                });
+            };
+            listBuilder(adminPendingComplaintsList, pendingComplaints, true);
+            listBuilder(adminSolvedComplaintsList, solvedComplaints, false);
+        }
+
+        window.solveComplaint = (complaintId) => { 
+            const complaintIndex = complaints.findIndex(c => c.id === complaintId);
+            if (complaintIndex > -1) {
+                complaints[complaintIndex].status = 'solved';
+                complaints[complaintIndex].solvedTimestamp = Date.now();
+                saveToStorage('ispComplaints', complaints);
+                renderAdminComplaints(); 
+                if (loggedInUserType === 'customer' && loggedInUserId === complaints[complaintIndex].customerId) {
+                    renderCustomerComplaints(loggedInUserId); 
+                }
+            }
+        }
+
+        function renderCustomerListForAdmin() {
+            adminCustomerListContainer.innerHTML = '';
+            if (customers.length === 0) {
+                adminCustomerListContainer.innerHTML = `<p data-lang-key="noCustomersFound">${langData[currentLang].noCustomersFound || 'कोई ग्राहक नहीं मिला।'}</p>`;
+                return;
+            }
+            customers.forEach(customer => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('customer-list-item');
+                itemDiv.innerHTML = `
+                    <div class="details">
+                        <p><strong>${langData[currentLang].nameLabel || 'नाम:'}</strong> ${customer.name}</p>
+                        <p><strong>${langData[currentLang].usernameLabel || 'यूजरनेम:'}</strong> ${customer.username}</p>
+                        <p><strong>${langData[currentLang].internetPlanLabel || 'प्लान:'}</strong> ${customer.plan}</p>
+                        <p><strong>${langData[currentLang].expiryDateLabel || 'समाप्ति:'}</strong> ${formatDate(customer.expiryDate)}</p>
+                    </div>
+                    <div class="actions">
+                        <button class="action-btn edit-customer-btn" data-id="${customer.id}" data-lang-key="editButton">${langData[currentLang].editButton || 'संपादित करें'}</button>
+                    </div>
+                `;
+                adminCustomerListContainer.appendChild(itemDiv);
+            });
+
+            document.querySelectorAll('.edit-customer-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const customerIdToEdit = e.target.dataset.id;
+                    populateEditCustomerForm(customerIdToEdit);
+                });
+            });
+        }
+
+        function populateEditCustomerForm(customerId) {
+            const customer = customers.find(c => c.id === customerId);
+            if (customer) {
+                editCustomerId.value = customer.id;
+                editCustomerName.value = customer.name;
+                editCustomerUsername.value = customer.username; 
+                editCustomerPassword.value = ''; 
+                editCustomerPlan.value = customer.plan;
+                const date = new Date(customer.expiryDate);
+                const year = date.getFullYear();
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const day = date.getDate().toString().padStart(2, '0');
+                editCustomerExpiryDate.value = `${year}-${month}-${day}`;
+
+
+                editCustomerFormContainer.classList.remove('hidden');
+                editCustomerMessage.className = 'hidden'; 
+            }
+        }
+        
+        editCustomerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const id = editCustomerId.value;
+            const name = editCustomerName.value;
+            const newPassword = editCustomerPassword.value;
+            const plan = editCustomerPlan.value;
+            const expiryDate = editCustomerExpiryDate.value; 
+
+            const customerIndex = customers.findIndex(c => c.id === id);
+            if (customerIndex > -1) {
+                customers[customerIndex].name = name;
+                if (newPassword.trim() !== '') { 
+                    customers[customerIndex].password = newPassword;
+                }
+                customers[customerIndex].plan = plan;
+                customers[customerIndex].expiryDate = expiryDate;
+
+                saveToStorage('ispCustomers', customers);
+                editCustomerMessage.textContent = langData[currentLang].successCustomerUpdated;
+                editCustomerMessage.className = 'success-message';
+                editCustomerMessage.classList.remove('hidden');
+                
+                renderCustomerListForAdmin(); 
+                setTimeout(() => {
+                    editCustomerFormContainer.classList.add('hidden');
+                    editCustomerMessage.className = 'hidden';
+                }, 2000);
+            } else {
+                editCustomerMessage.textContent = langData[currentLang].errorCustomerNotFound;
+                editCustomerMessage.className = 'error-message';
+                editCustomerMessage.classList.remove('hidden');
+            }
+        });
+
+        cancelEditCustomerBtn.addEventListener('click', () => {
+            editCustomerFormContainer.classList.add('hidden');
+            editCustomerForm.reset();
+            editCustomerMessage.className = 'hidden';
+        });
+
+
+        function displayCustomerInfo(customer) {
+            if (customer) {
+                loggedInCustomerName.textContent = customer.name;
+                loggedInCustomerPlan.textContent = customer.plan;
+                loggedInCustomerExpiryDate.textContent = formatDate(customer.expiryDate);
+            }
+        }
+
+        complaintTypeSelect.addEventListener('change', () => { 
+            otherComplaintDetailsDiv.classList.toggle('hidden', complaintTypeSelect.value !== 'Other');
+            if (complaintTypeSelect.value !== 'Other') otherComplaintDetails.value = ''; 
+        });
+        
+        submitComplaintForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            complaintSubmitMessage.classList.add('hidden');
+            if (loggedInUserType !== 'customer' || !loggedInUserId) return;
+
+            const existingPendingComplaint = complaints.find(c => c.customerId === loggedInUserId && c.status === 'pending');
+
+            if (existingPendingComplaint) {
+                complaintSubmitMessage.textContent = langData[currentLang].errorPendingComplaintExists;
+                complaintSubmitMessage.className = 'error-message';
+                complaintSubmitMessage.style.color = 'orange';
+                complaintSubmitMessage.classList.remove('hidden');
+                return;
+            }
+
+            const typeValue = complaintTypeSelect.value; 
+            let details = null;
+            if (typeValue === 'Other') {
+                details = otherComplaintDetails.value;
+                if (!details.trim()) {
+                    complaintSubmitMessage.textContent = langData[currentLang].errorOtherComplaintDetails;
+                    complaintSubmitMessage.className = 'error-message';
+                    complaintSubmitMessage.classList.remove('hidden');
+                    return;
+                }
+            }
+
+            const newComplaint = { id: Date.now().toString(), customerId: loggedInUserId, type: typeValue, details, status: 'pending', timestamp: Date.now() };
+            complaints.push(newComplaint);
+            saveToStorage('ispComplaints', complaints);
+            
+            complaintSubmitMessage.textContent = langData[currentLang].successComplaintRegistered;
+            complaintSubmitMessage.className = 'success-message';
+            complaintSubmitMessage.classList.remove('hidden');
+            submitComplaintForm.reset();
+            otherComplaintDetailsDiv.classList.add('hidden');
+            
+            renderCustomerComplaints(loggedInUserId);
+            if (adminDashboardSection.classList.contains('hidden') === false) renderAdminComplaints();
+            
+            setTimeout(() => { complaintSubmitMessage.className = 'hidden'; complaintSubmitMessage.style.color = ''; }, 3000);
+        });
+
+        function renderCustomerComplaints(customerId) {
+            customerComplaintsList.innerHTML = '';
+            const customerSpecificComplaints = complaints.filter(c => c.customerId === customerId);
+            
+            submitComplaintBtn.disabled = false; 
+            complaintSubmitMessage.className = 'hidden';
+            complaintSubmitMessage.style.color = '';
+
+            if (customerSpecificComplaints.some(c => c.status === 'pending')) {
+                submitComplaintBtn.disabled = true;
+                complaintSubmitMessage.textContent = langData[currentLang].errorPendingComplaintExists;
+                complaintSubmitMessage.className = 'error-message'; 
+                complaintSubmitMessage.style.color = 'orange'; 
+                complaintSubmitMessage.classList.remove('hidden');
+            }
+
+            if (customerSpecificComplaints.length === 0) {
+                customerComplaintsList.innerHTML = `<p data-lang-key="noComplaintsRegistered">${langData[currentLang].noComplaintsRegistered}</p>`;
+                return;
+            }
+
+            customerSpecificComplaints.sort((a,b) => b.timestamp - a.timestamp).forEach(complaint => {
+                const complaintDiv = document.createElement('div');
+                complaintDiv.classList.add('complaint-item', complaint.status);
+                
+                let complaintTypeText = complaint.type;
+                if (complaint.type === "Internet not working") complaintTypeText = langData[currentLang].complaintTypeNotWorking;
+                else if (complaint.type === "Speed Slow") complaintTypeText = langData[currentLang].complaintTypeSlowSpeed;
+                else if (complaint.type === "Other") complaintTypeText = langData[currentLang].complaintTypeOther;
+
+                complaintDiv.innerHTML = `
+                    <p><strong>${langData[currentLang].complaintTypeLabel || 'प्रकार:'}</strong> ${complaintTypeText}</p>
+                    ${complaint.details ? `<p><strong>${langData[currentLang].detailsLabel || 'विवरण:'}</strong> ${complaint.details}</p>` : ''}
+                    <p><strong>${langData[currentLang].statusLabel || 'स्थिति:'}</strong> ${complaint.status === 'pending' ? (langData[currentLang].statusPending || 'लंबित') : (langData[currentLang].statusSolved || 'हल हो गई')}</p>
+                    <p><strong>${langData[currentLang].dateRegisteredLabel || 'दर्ज तिथि:'}</strong> ${formatDate(new Date(complaint.timestamp))}</p>
+                    ${complaint.status === 'solved' && complaint.solvedTimestamp ? `<p><strong>${langData[currentLang].dateSolvedLabel || 'हल तिथि:'}</strong> ${formatDate(new Date(complaint.solvedTimestamp))}</p>` : ''}
+                `;
+                customerComplaintsList.appendChild(complaintDiv);
+            });
+        }
+        
+        const currentTheme = localStorage.getItem('ispAppTheme');
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeToggleBtn.textContent = langData[currentLang].themeToggleLight;
+            } else {
+                document.body.classList.remove('dark-theme');
+                themeToggleBtn.textContent = langData[currentLang].themeToggleDark;
+            }
+        }
+
+        if (currentTheme) {
+            applyTheme(currentTheme);
+        } else { 
+            applyTheme('light');
+        }
+
+
+        themeToggleBtn.addEventListener('click', () => {
+            let newTheme = 'light';
+            if (document.body.classList.contains('dark-theme')) {
+                newTheme = 'light';
+            } else {
+                newTheme = 'dark';
+            }
+            applyTheme(newTheme);
+            localStorage.setItem('ispAppTheme', newTheme);
+        });
+
+
+        function initializeApp() {
+            applyLanguage(currentLang); 
+            showMainSection('loginSection'); 
+        }
+        initializeApp();
+    </script>
+</body>
+</html>
